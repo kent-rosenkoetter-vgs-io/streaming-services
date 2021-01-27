@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package knox;
+option java_package = "com.verygood.security.example.knox.grpc";
+option java_multiple_files = true;
+
+message GetOrCreateAlias {
+  string sensitiveData = 1;
+  string format = 2;
+}
+
+message SensitiveDataAlias {
+  string alias = 1;
+}
+
+service KnoxService {
+  rpc Tessellate(GetOrCreateAlias) returns (SensitiveDataAlias);
+}

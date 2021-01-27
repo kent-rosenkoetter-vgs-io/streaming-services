@@ -17,6 +17,8 @@
         <module>tessellation-data-model</module>
         <module>tessellation-service-grpc</module>
         <module>tessellation-service-rest</module>
+        <module>knox-api</module>
+        <module>file-processor</module>
     </modules>
     <organization>
         <name>Very Good Security</name>
@@ -152,6 +154,13 @@
                 <groupId>com.newrelic.agent.java</groupId>
                 <artifactId>newrelic-api</artifactId>
                 <version>6.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.7.0</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

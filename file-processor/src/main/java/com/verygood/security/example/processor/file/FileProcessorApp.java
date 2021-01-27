@@ -1,13 +1,10 @@
 package com.verygood.security.example.processor.file;
 
-import com.verygood.security.example.knox.grpc.AliasRequest;
 import com.verygood.security.example.knox.grpc.KnoxServiceGrpc;
-import com.verygood.security.example.knox.grpc.SensitiveDataAlias;
 import io.grpc.ManagedChannel;
 import io.grpc.Server;
 import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
-import io.grpc.stub.StreamObserver;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -33,16 +30,7 @@ public class FileProcessorApp {
   public static void main(final String[] args) throws IOException, InterruptedException, ExecutionException {
     final String serverName = InProcessServerBuilder.generateName();
     final Server server = InProcessServerBuilder.forName(serverName)
-        .addService(new KnoxServiceGrpc.KnoxServiceImplBase() {
-          @Override
-          public void getOrCreateAlias(final AliasRequest request,
-              final StreamObserver<SensitiveDataAlias> responseObserver) {
-            responseObserver.onNext(SensitiveDataAlias.newBuilder()
-                .setAlias("sensitive stuff")
-                .build());
-            responseObserver.onCompleted();
-          }
-        })
+        .addService(new InlinePretendKnoxService())
         .build().start();
     final ManagedChannel channel = InProcessChannelBuilder.forName(serverName).build();
     final KnoxServiceGrpc.KnoxServiceFutureStub knoxServiceFutureStub = KnoxServiceGrpc.newFutureStub(channel);

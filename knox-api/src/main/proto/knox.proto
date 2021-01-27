@@ -4,7 +4,7 @@ package knox;
 option java_package = "com.verygood.security.example.knox.grpc";
 option java_multiple_files = true;
 
-message GetOrCreateAlias {
+message AliasRequest {
   string sensitiveData = 1;
   string format = 2;
 }
@@ -14,5 +14,5 @@ message SensitiveDataAlias {
 }
 
 service KnoxService {
-  rpc Tessellate(GetOrCreateAlias) returns (SensitiveDataAlias);
+  rpc GetOrCreateAlias(AliasRequest) returns (SensitiveDataAlias);
 }

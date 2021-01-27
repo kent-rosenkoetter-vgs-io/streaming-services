@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Record {
 
+  public static final Record COMPLETED = new Record(null, null, null, null, null, null, null, null, null, null) {};
+
   // Address,City,State,Zip,First Name,Last Name,Card Type,Card Num,Expiration,CVV
   private final String address;
   private final String city;
